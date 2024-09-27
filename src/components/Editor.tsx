@@ -12,15 +12,16 @@ export default function Editor(props: Props) {
     setText(e.target.value);
   };
 
-  const onClickButton = () => {
+  const onClickButton = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     dispatch.onClickAdd(text);
     setText("");
   };
 
   return (
-    <form>
+    <form onSubmit={onClickButton}>
       <input type="text" value={text} onChange={onChangeInput} />
-      <button onClick={onClickButton}>추가</button>
+      <button type="submit">추가</button>
     </form>
   );
 }
